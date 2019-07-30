@@ -6,15 +6,46 @@ import TodoInput from './components/TodoInput';
 import TodoItem from './components/TodoItem';
 class App extends Component{
   state={
-    items:[{id:1,title:"wake up"},{id:2,title:"make breakfast" }],
+    items:[],
     id:uuid(),
-    item:'',
+    item:"",
     editItem:false
   };
-  handleChange=(e)=>{console.log('handle change')}
-  handleSubmit=(e)=>{console.log('handle Submit')}
-  clearList=()=>{console.log('clear list')}
-  handleDelete=(id)=>{console.log(`handle edit ${id}`)}
+  handleChange = e => {
+    this.setState({
+      item: e.target.value
+    });
+  };
+  handleSubmit= e =>{
+    e.preventDefault();
+    const newItem = {
+      id:this.state.id,
+      title:this.state.item
+    };
+    const updateItems = [...this.state.items,newItem];
+
+    this.setState(
+      {
+        items:updateItems,
+        item:"",
+        id:uuid(),
+        editItem:false
+      }
+    );
+  };
+  clearList=()=>{
+    this.setState({
+      items:[]
+    });
+
+  }
+  handleDelete= id =>{
+    const filteredItems = this.state.items.filter(item =>
+      item.id !== id);
+      this.setState({
+        items: filteredItems
+      });
+  };
   handleEdit=(id)=>{console.log(`edit edit ${id}`)}
   render(){
     return (
