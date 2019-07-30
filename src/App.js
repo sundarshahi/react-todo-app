@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import uuid from "uuid";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TodoList from './components/TodoList';
 import TodoInput from './components/TodoInput';
-import TodoItem from './components/TodoItem';
+import TodoList from './components/TodoList';
 class App extends Component{
   state={
     items:[],
@@ -46,7 +45,18 @@ class App extends Component{
         items: filteredItems
       });
   };
-  handleEdit=(id)=>{console.log(`edit edit ${id}`)}
+  handleEdit= id => {
+    const filteredItems = this.state.items.filter(item =>
+      item.id !== id);
+      const selectedItem = this.state.items.find(item =>
+        item.id===id);
+        this.setState({
+          items:filteredItems,
+          item:selectedItem.title,
+          id:id,
+          editItem: true
+        });
+    };
   render(){
     return (
       <div className=" container">
@@ -67,7 +77,7 @@ class App extends Component{
               handleEdit={this.handleEdit}
             />
             
-            <TodoItem/>
+            
           </div>
         </div>
       </div>
