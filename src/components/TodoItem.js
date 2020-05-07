@@ -1,8 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class TodoItem extends Component {
-  render() {
-    const { title, handleDelete, handleEdit } = this.props;
+export default function TodoItem ({ title, handleDelete, handleEdit }) {
     return (
       <li className="list-group-item text-capitalize d-flex justify-content-between my-2">
         <h6>{title}</h6>
@@ -17,5 +15,4 @@ export default class TodoItem extends Component {
       </li>
     );
   }
-}
 
